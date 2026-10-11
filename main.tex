@@ -1,0 +1,134 @@
+%----------------------------------------------------------
+% Yash Patel — Resume (modern minimal)
+% Compile with pdflatex
+%----------------------------------------------------------
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage[top=0.45in,bottom=0.45in,left=0.5in,right=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{charter}  % clean serif (Bitstream Charter)
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\definecolor{accent}{HTML}{1A1A1A}
+\definecolor{rulecolor}{HTML}{C8C8C8}
+\definecolor{muted}{HTML}{555555}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\raggedright
+\raggedbottom
+
+% Section: small caps, letterspaced, thin gray rule
+\titleformat{\section}
+  {\scshape\large\color{accent}}
+  {}{0em}{}
+  [{\color{rulecolor}\titlerule[0.5pt]}]
+\titlespacing*{\section}{0pt}{6pt}{2pt}
+
+% Entry heading: bold left, dates right; role/location line below
+\newcommand{\entry}[4]{%
+  \begin{tabularx}{\textwidth}{@{}X@{}r@{}}
+    \textbf{#1} & {\small\color{muted}#2} \\
+    {\small\itshape #3} & {\small\itshape\color{muted}#4} \\
+  \end{tabularx}\vspace{-3pt}
+}
+
+\newcommand{\project}[3]{%
+  \begin{tabularx}{\textwidth}{@{}X@{}r@{}}
+    \textbf{#1}\; {\small\color{muted}\itshape #2} & {\small #3} \\
+  \end{tabularx}\vspace{-3pt}
+}
+
+\newenvironment{bullets}
+  {\begin{itemize}[leftmargin=1.1em, itemsep=0pt, topsep=1pt, parsep=0pt, label={\color{muted}\footnotesize\textbullet}]\small}
+  {\end{itemize}\vspace{-1pt}}
+
+\newcommand{\skill}[2]{\textbf{#1}\enspace {\color{muted}·}\enspace #2\\[0pt]}
+
+\begin{document}
+
+%---------- Header (centered) ----------
+\begin{center}
+  {\huge\scshape Yash Patel}\\[1pt]
+  {\small  +919106377186\,{\color{muted}·}\, \href{mailto:yhp2378@gmail.com}{yhp2378@gmail.com} \,{\color{muted}·}\, \href{https://www.linkedin.com/in/yashp5/}{linkedin.com/in/yashp5} \,{\color{muted}·}\, \href{https://yashp.xyz/}{yashp.xyz}}\\[1pt]
+  {\color{muted}\itshape\small Software Engineer \,·\, Distributed Systems \,·\, Go, Python, Kafka, PostgreSQL}
+\end{center}
+
+\vspace{-4pt}
+{\color{rulecolor}\hrule height 0.5pt}
+\vspace{2pt}
+
+%---------- Summary ----------
+% {\small Backend software engineer with 4+ years building low-latency trading and event-driven systems; currently developing LLM inference serving infrastructure targeting ML infra and fintech roles.}
+
+%---------- Summary ----------
+{\small Backend software engineer with 4+ years building low-latency trading and event-driven systems; currently developing LLM inference engine targeting ML infra and fintech roles.}
+
+%---------- Skills ----------
+\section{Skills}
+{\small
+\skill{Languages}{Go, Python, C++, TypeScript}
+\skill{Backend \& Distributed Systems}{Microservices, Event-Driven Architecture, Concurrency, gRPC, WebSockets}
+\skill{Data \& Streaming}{Kafka, PostgreSQL, Redis, Elasticsearch}
+\skill{ML Infrastructure}{LLM Inference Engine, Dynamic + Continuous Batching, llama.cpp, PyTorch}
+\skill{Infrastructure \& Observability}{Docker, Kubernetes, AWS, GCP, CI/CD, Linux, Prometheus, Grafana, Kibana}
+}
+
+%---------- Experience ----------
+\section{Experience}
+
+\entry{Dora}{Jun 2025 -- Feb 2026}{Software Engineer}{New York}
+\begin{bullets}
+  \item Built Go backend services for a low-latency tokenized bond trading exchange, spanning order matching, market data distribution, account updates, and trading-risk calculations
+  \item Replaced DB-backed lookups with an event-driven in-memory cache in the matching loop, cutting p50 latency from 4.55ms to 3.69ms
+  \item Implemented trading-risk APIs for average entry price, margin, unrealized PnL, LTV, health ratio, and liquidation pricing using PostgreSQL triggers and LISTEN/NOTIFY event patterns
+  \item Implemented high-throughput WebSocket APIs for real-time trading data using Go concurrency, shared in-memory caching, and fan-out broadcasting
+  \item Developed a market-making bot that quoted symmetric bids and asks around mid-price and reconciled orders on every price-change event, improving order book depth
+  \item Developed worker daemons with atomic PostgreSQL transactions to ensure consistency across distributed account updates for bond coupon payments
+\end{bullets}
+
+\entry{Cashflo}{Sep 2022 -- Sep 2023}{Software Engineer}{Mumbai}
+\begin{bullets}
+  \item Built a distributed ingestion pipeline in Go that synced accounting records from on-premise ERP instances using batched uploads with sequence tracking, idempotent retries, and cross-instance deduplication
+  \item Designed a three-way reconciliation system that cross-referenced credit notes, debit notes, and invoices with JSON schema validation, routing matched records to Kafka and invalid records to an error topic
+\end{bullets}
+
+\entry{Elocity}{May 2020 -- Sep 2022}{Software Engineer}{Bangalore}
+\begin{bullets}
+  \item Built a distributed device management platform supporting 700+ persistent WebSocket connections from EV chargers for telemetry ingestion and remote operations
+  \item Designed Kafka-based event streaming pipelines processing 30--40 device events/sec, including heartbeats, status updates, and charging telemetry
+  \item Built real-time session processing services that aggregated meter-value event streams and computed billing deltas from append-only data streams
+  \item Indexed charging session events in Elasticsearch to enable low-latency analytics and billing queries
+  % \item Implemented fault-tolerant device control workflows for remote operations and over-the-air firmware updates
+  \item Collaborated on AWS/Kubernetes deployments using Docker, Helm, and GitLab CI, with Istio and Grafana for observability.
+\end{bullets}
+
+%---------- Projects ----------
+\section{Projects}
+
+\project{Inference Engine}{Go, Python, gRPC}{\href{https://github.com/yashp5/inference-engine}{github.com/yashp5/inference-engine}}
+\begin{bullets}
+  \item Built an LLM inference serving engine with a Go control plane and gRPC Python workers running llama-cpp-python
+  \item Implemented priority-queue request scheduling, token-bucket rate limiting, dynamic batching and continuous batching with KV Cache to maximize throughput under concurrent load
+\end{bullets}
+
+\project{GPU Demand Response Protocol}{Go, WebSockets}{\href{https://github.com/grene-labs/grene}{github.com/grene-labs/grene}}
+\begin{bullets}
+  \item Built a GPU demand-response control plane that dispatches curtailment events over a custom WebSocket protocol to node agents that ramp GPU power caps via nvidia-smi and auto-restore on completion or failure
+  \item Implemented per-GPU telemetry streaming (power draw, cap, utilization, temperature), heartbeats, and agent state machines (ramping, holding, restoring), plus a mock GPU driver for end-to-end testing
+\end{bullets}
+
+%---------- Education ----------
+\section{Education}
+\textbf{New York University}\hspace{.5em}; {\small\itshape M.S. in Computer Engineering}\hfill{\small\color{muted}2023 -- 2025}\\[1pt]
+\textbf{Ahmedabad University}\hspace{.5em}; {\small\itshape B.S. in Information and Communication Technology}\hfill{\small\color{muted}2016 -- 2020}
+
+\end{document}
