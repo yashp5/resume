@@ -2,9 +2,9 @@
 % Yash Patel — Resume (modern minimal)
 % Compile with pdflatex
 %----------------------------------------------------------
-\documentclass[letterpaper,11pt]{article}
+\documentclass[letterpaper,12pt]{article}
 
-\usepackage[top=0.45in,bottom=0.45in,left=0.5in,right=0.5in]{geometry}
+\usepackage[top=0.39in,bottom=0.39in,left=0.47in,right=0.47in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{charter}  % clean serif (Bitstream Charter)
@@ -31,55 +31,52 @@
   {\scshape\large\color{accent}}
   {}{0em}{}
   [{\color{rulecolor}\titlerule[0.5pt]}]
-\titlespacing*{\section}{0pt}{6pt}{2pt}
+\titlespacing*{\section}{0pt}{2pt}{1pt}
 
 % Entry heading: bold left, dates right; role/location line below
 \newcommand{\entry}[4]{%
   \begin{tabularx}{\textwidth}{@{}X@{}r@{}}
     \textbf{#1} & {\small\color{muted}#2} \\
     {\small\itshape #3} & {\small\itshape\color{muted}#4} \\
-  \end{tabularx}\vspace{-3pt}
+  \end{tabularx}\vspace{3pt}
 }
 
 \newcommand{\project}[3]{%
   \begin{tabularx}{\textwidth}{@{}X@{}r@{}}
     \textbf{#1}\; {\small\color{muted}\itshape #2} & {\small #3} \\
-  \end{tabularx}\vspace{-3pt}
+  \end{tabularx}\vspace{3.5pt}
 }
 
 \newenvironment{bullets}
-  {\begin{itemize}[leftmargin=1.1em, itemsep=0pt, topsep=1pt, parsep=0pt, label={\color{muted}\footnotesize\textbullet}]\small}
-  {\end{itemize}\vspace{-1pt}}
+  {\begin{itemize}[leftmargin=1.1em, itemsep=0pt, topsep=0pt, parsep=0pt, label={\color{muted}\footnotesize\textbullet}]\fontsize{11}{13.0}\selectfont}
+  {\end{itemize}\vspace{-3pt}}
 
-\newcommand{\skill}[2]{\textbf{#1}\enspace {\color{muted}·}\enspace #2\\[0pt]}
+\newcommand{\skill}[2]{\textbf{#1}\enspace {\color{muted}·}\enspace #2\\[-1pt]}
 
 \begin{document}
 
 %---------- Header (centered) ----------
 \begin{center}
   {\huge\scshape Yash Patel}\\[1pt]
-  {\small  +919106377186\,{\color{muted}·}\, \href{mailto:yhp2378@gmail.com}{yhp2378@gmail.com} \,{\color{muted}·}\, \href{https://www.linkedin.com/in/yashp5/}{linkedin.com/in/yashp5} \,{\color{muted}·}\, \href{https://yashp.xyz/}{yashp.xyz}}\\[1pt]
-  {\color{muted}\itshape\small Software Engineer \,·\, Distributed Systems \,·\, Go, Python, Kafka, PostgreSQL}
+  {\small
+    +919106377186\,{\color{muted}·}\,
+    \href{mailto:yhp2378@gmail.com}{yhp2378@gmail.com}
+    \,{\color{muted}·}\,
+    \href{https://www.linkedin.com/in/yashp5/}{linkedin.com/in/yashp5}
+    \,{\color{muted}·}\,
+    \href{https://yashp.xyz/}{yashp.xyz}
+  }
 \end{center}
-
-\vspace{-4pt}
-{\color{rulecolor}\hrule height 0.5pt}
-\vspace{2pt}
-
-%---------- Summary ----------
-% {\small Backend software engineer with 4+ years building low-latency trading and event-driven systems; currently developing LLM inference serving infrastructure targeting ML infra and fintech roles.}
-
-%---------- Summary ----------
-{\small Backend software engineer with 4+ years building low-latency trading and event-driven systems; currently developing LLM inference engine targeting ML infra and fintech roles.}
+\vspace{-12pt}
 
 %---------- Skills ----------
-\section{Skills}
+\section{Skills}\vspace{1.2pt}
 {\small
 \skill{Languages}{Go, Python, C++, TypeScript}
-\skill{Backend \& Distributed Systems}{Microservices, Event-Driven Architecture, Concurrency, gRPC, WebSockets}
-\skill{Data \& Streaming}{Kafka, PostgreSQL, Redis, Elasticsearch}
-\skill{ML Infrastructure}{LLM Inference Engine, Dynamic + Continuous Batching, llama.cpp, PyTorch}
-\skill{Infrastructure \& Observability}{Docker, Kubernetes, AWS, GCP, CI/CD, Linux, Prometheus, Grafana, Kibana}
+\skill{Systems}{Concurrency, Distributed Systems, gRPC, WebSockets, Kafka}
+\skill{ML}{PyTorch, llama.cpp, Continuous Batching, Inference Scheduling, KV Cache}
+\skill{Infrastructure}{Docker, Kubernetes, AWS, GCP, Linux}
+\skill{Data \& Observability}{PostgreSQL, Redis, Elasticsearch, Prometheus, Grafana}
 }
 
 %---------- Experience ----------
@@ -87,28 +84,28 @@
 
 \entry{Dora}{Jun 2025 -- Feb 2026}{Software Engineer}{New York}
 \begin{bullets}
-  \item Built Go backend services for a low-latency tokenized bond trading exchange, spanning order matching, market data distribution, account updates, and trading-risk calculations
-  \item Replaced DB-backed lookups with an event-driven in-memory cache in the matching loop, cutting p50 latency from 4.55ms to 3.69ms
-  \item Implemented trading-risk APIs for average entry price, margin, unrealized PnL, LTV, health ratio, and liquidation pricing using PostgreSQL triggers and LISTEN/NOTIFY event patterns
-  \item Implemented high-throughput WebSocket APIs for real-time trading data using Go concurrency, shared in-memory caching, and fan-out broadcasting
-  \item Developed a market-making bot that quoted symmetric bids and asks around mid-price and reconciled orders on every price-change event, improving order book depth
-  \item Developed worker daemons with atomic PostgreSQL transactions to ensure consistency across distributed account updates for bond coupon payments
+  \item Built Go backend services for a low-latency tokenized bond exchange, spanning order matching, market data, account updates, and trading-risk calculations.
+  \item Reduced matching-loop p50 latency by 19\% (4.55ms to 3.69ms) by replacing database lookups with event-driven in-memory caching.
+  \item Built concurrent Go WebSocket APIs for real-time trading data using shared in-memory caches and fan-out broadcasting.
+  \item Developed trading-risk APIs for margin, unrealized PnL, LTV, health ratios, and liquidation pricing, using PostgreSQL triggers and LISTEN/NOTIFY for event-driven updates.
+  % \item Developed a market-making bot that quoted symmetric bids and asks around mid-price and reconciled orders on every price-change event, improving order book depth
+  \item Built transactional PostgreSQL workers for bond coupon payments, ensuring atomic account updates.
 \end{bullets}
 
+\vspace{7pt}
 \entry{Cashflo}{Sep 2022 -- Sep 2023}{Software Engineer}{Mumbai}
 \begin{bullets}
-  \item Built a distributed ingestion pipeline in Go that synced accounting records from on-premise ERP instances using batched uploads with sequence tracking, idempotent retries, and cross-instance deduplication
-  \item Designed a three-way reconciliation system that cross-referenced credit notes, debit notes, and invoices with JSON schema validation, routing matched records to Kafka and invalid records to an error topic
+  \item Built a distributed Go ingestion pipeline syncing accounting records from on-premises ERP instances, with batched uploads, sequence tracking, idempotent retries, and cross-instance deduplication.
+  \item Designed a three-way reconciliation system that cross-referenced purchase orders, goods receipts, and invoices with JSON schema validation, routing matched records to Kafka and invalid records to an error topic.
 \end{bullets}
 
+\vspace{7pt}
 \entry{Elocity}{May 2020 -- Sep 2022}{Software Engineer}{Bangalore}
 \begin{bullets}
-  \item Built a distributed device management platform supporting 700+ persistent WebSocket connections from EV chargers for telemetry ingestion and remote operations
-  \item Designed Kafka-based event streaming pipelines processing 30--40 device events/sec, including heartbeats, status updates, and charging telemetry
-  \item Built real-time session processing services that aggregated meter-value event streams and computed billing deltas from append-only data streams
-  \item Indexed charging session events in Elasticsearch to enable low-latency analytics and billing queries
-  % \item Implemented fault-tolerant device control workflows for remote operations and over-the-air firmware updates
-  \item Collaborated on AWS/Kubernetes deployments using Docker, Helm, and GitLab CI, with Istio and Grafana for observability.
+  \item Built a distributed device-management platform supporting 700+ persistent WebSocket connections from EV chargers for telemetry and remote operations.
+  \item Developed Kafka event pipelines for charger heartbeats, status updates, and meter readings, with real-time session aggregation and billing-delta calculations.
+  \item Indexed charging-session events in Elasticsearch to support analytics and billing queries.
+  \item Supported AWS/Kubernetes deployments using Docker, Helm, and GitLab CI, with Istio and Grafana for observability.
 \end{bullets}
 
 %---------- Projects ----------
@@ -116,19 +113,20 @@
 
 \project{Inference Engine}{Go, Python, gRPC}{\href{https://github.com/yashp5/inference-engine}{github.com/yashp5/inference-engine}}
 \begin{bullets}
-  \item Built an LLM inference serving engine with a Go control plane and gRPC Python workers running llama-cpp-python
-  \item Implemented priority-queue request scheduling, token-bucket rate limiting, dynamic batching and continuous batching with KV Cache to maximize throughput under concurrent load
+  \item Built an LLM serving engine with a Go control plane and gRPC Python workers, implementing priority scheduling, token-bucket rate limiting, and admission control
+  \item Implemented continuous batching with per-sequence KV-cache management using llama.cpp, achieving 49\% higher token throughput and 40\% lower p99 latency at 32 concurrent mixed-length requests versus static serving
 \end{bullets}
 
+\vspace{6pt}
 \project{GPU Demand Response Protocol}{Go, WebSockets}{\href{https://github.com/grene-labs/grene}{github.com/grene-labs/grene}}
 \begin{bullets}
-  \item Built a GPU demand-response control plane that dispatches curtailment events over a custom WebSocket protocol to node agents that ramp GPU power caps via nvidia-smi and auto-restore on completion or failure
-  \item Implemented per-GPU telemetry streaming (power draw, cap, utilization, temperature), heartbeats, and agent state machines (ramping, holding, restoring), plus a mock GPU driver for end-to-end testing
+  \item Built a GPU demand-response control plane dispatching curtailment commands to WebSocket agents that adjust GPU power caps via nvidia-smi and automatically restore them on completion or failure
+  \item Implemented GPU telemetry streaming, heartbeats, and ramp/hold/restore state machines, with a mock GPU driver for end-to-end testing
 \end{bullets}
 
 %---------- Education ----------
 \section{Education}
-\textbf{New York University}\hspace{.5em}; {\small\itshape M.S. in Computer Engineering}\hfill{\small\color{muted}2023 -- 2025}\\[1pt]
-\textbf{Ahmedabad University}\hspace{.5em}; {\small\itshape B.S. in Information and Communication Technology}\hfill{\small\color{muted}2016 -- 2020}
+\textbf{New York University}\hspace{.5em} {\small\itshape M.S. in Computer Engineering}\hfill{\small\color{muted}2023 -- 2025}\\[1pt]
+\textbf{Ahmedabad University}\hspace{.5em} {\small\itshape B.S. in Information and Communication Technology}\hfill{\small\color{muted}2016 -- 2020}
 
 \end{document}
