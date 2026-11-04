@@ -115,13 +115,8 @@
 \begin{bullets}
   \item Built an LLM serving engine with a Go control plane and gRPC Python workers, implementing priority scheduling, token-bucket rate limiting, and admission control
   \item Implemented continuous batching with per-sequence KV-cache management using llama.cpp, achieving 49\% higher token throughput and 40\% lower p99 latency at 32 concurrent mixed-length requests versus static serving
-\end{bullets}
-
-\vspace{6pt}
-\project{GPU Demand Response Protocol}{Go, WebSockets}{\href{https://github.com/grene-labs/grene}{github.com/grene-labs/grene}}
-\begin{bullets}
-  \item Built a GPU demand-response control plane dispatching curtailment commands to WebSocket agents that adjust GPU power caps via nvidia-smi and automatically restore them on completion or failure
-  \item Implemented GPU telemetry streaming, heartbeats, and ramp/hold/restore state machines, with a mock GPU driver for end-to-end testing
+  \item Multi-Model Management,  Horizontal Scaling, Load Balancing and KV Cache Management
+  \item Metrics, Observability, Kubernetes Deployment and Operator
 \end{bullets}
 
 %---------- Education ----------
